@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+echo "Name: "
+read name
+
+echo "Phone Number: "
+read number
+
+echo "Email Address: "
+read email
+
+echo $name >> ~/.contacts
+echo $number >> ~/.contacts
+echo $email >> ~/.contacts
+echo '##' >> ~/.contacts
+echo '##' >> ~/.contacts
