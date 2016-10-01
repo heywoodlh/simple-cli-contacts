@@ -7,12 +7,16 @@ if [[ $1 == "--type" ]]; then
 	typeit=1
 	shift
 fi
-
-contact=$(cat ~/.contacts | rofi -dmenu -p "contact: ")
-[[ -n $contact ]] || exit
+contact=$(grep "Name:" ~/.contacts | cut -d":" -f2- | rofi -dmenu -p "contact: ")
 
 if [[ $typeit -eq 0 ]]; then
-	grep -i -A 2 $contact ~/.contacts
+	grep -i -A 2 "$contact" ~/.contacts\
+        | cut -d":" -f2-\
+        | sed 's/\#//g'\
+        | head -2\
+        | tail -1\
+        | xclip -sel clip
+    
 else
-    echo "No contact found"
+    exit
 fi
