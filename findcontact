@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-echo "Search contact:"; read contact
-
-grep $contact -A 2 ~/.contacts
