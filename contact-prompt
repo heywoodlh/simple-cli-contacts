@@ -17,6 +17,7 @@ if [[ $typeit -eq 0 ]]; then
         | head -1 \
         | cut -d":" -f2- \
         | tr -d '\r' \
+        | tr -d '\n' \
         | xclip -sel clip
 else
     exit
