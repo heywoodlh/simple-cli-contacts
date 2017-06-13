@@ -7,9 +7,15 @@ deps="rofi xclip"
 for d in $deps
 do
     if ! which $d 
-    then 
-        echo "Please install $d"
-        exit 1
+    then
+        if uname | grep --quiet "Linux"
+        then
+            notify-send "Please install $d"
+            exit 1
+        else
+            echo "Please install $d"
+            exit 1
+        fi
     fi
 done
 
