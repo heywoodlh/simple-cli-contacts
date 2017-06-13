@@ -2,6 +2,17 @@
 
 vcf=~/.contacts.vcf 
 
+deps="rofi xclip"
+
+for d in $deps
+do
+    if ! which $d 
+    then 
+        echo "Please install $d"
+        exit 1
+    fi
+done
+
 shopt -s nullglob globstar
 
 typeit=0
