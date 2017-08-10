@@ -4,9 +4,12 @@ Super simple BASH based contact viewer, which easily searches all contacts in vc
 Contact Prompt Description:
 GUI application that lists all contacts within the .vcf file and copies cell phone numbers to clipboard. Can be set as a hotkey for easy access.
 
-Dependencies:
+Linux Dependencies:
 rofi
 xclip
+
+OS X Dependencies:
+choose https://github.com/sdegutis/choose
 
 Compatible only with vcard .vcf files. 
 
@@ -19,4 +22,4 @@ To use contact-prompt:
 2. Execute contact-prompt
 
 Optional: 
-1. Place contact-prompt in $PATH to make it a command
+Place contact-prompt in $PATH to make it a command
