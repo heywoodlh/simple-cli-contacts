@@ -2,6 +2,11 @@
 
 vcf=~/.contacts.vcf 
 
+if [ -f ! ~/.contacts.vcf ]
+then
+    echo "Please download contacts card and place it in ~/.contacts.vcf"
+fi
+
 deps="rofi xclip"
 
 for d in $deps
