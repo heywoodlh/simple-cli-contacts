@@ -1,4 +1,4 @@
-# simple-cli-contacts
+# simple-contacts
 Super simple BASH based contact viewer, which easily searches all contacts in vcard file. 
 
 Contact Prompt Description:
