@@ -68,6 +68,6 @@ fi
 
 fullName=$(grep 'FN' ${vcf} | cut -d":" -f2- | sed '/^\s*$/d' | sort -u | fzf)
 
-selection=$(awk '/FN:'"${fullName}"'/,/END:VCARD/' ~/.contacts.vcf | grep -v "END:VCARD" | cut -d':' -f2 | grep -v "${fullName}" | sort -u | fzf | tr -d '\r\n')
+selection=$(awk '/FN:'"${fullName}"'/,/END:VCARD/' ${vcf} | grep -v "END:VCARD" | cut -d':' -f2 | grep -v "${fullName}" | sort -u | fzf | tr -d '\r\n')
 
 echo "${selection}"
