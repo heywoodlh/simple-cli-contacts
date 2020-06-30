@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-grep -E "FN|TYPE=CELL|INTERNET" ~/.contacts.vcf | cut -d":" -f2- | sed '/^\s*$/d' | less

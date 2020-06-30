@@ -1,25 +1,18 @@
 # simple-contacts
-Super simple BASH based contact viewer, which easily searches all contacts in vcard file. 
+BASH script that lists all contacts within the specified .vcf file.
 
-Contact Prompt Description:
-GUI application that lists all contacts within the .vcf file and copies cell phone numbers to clipboard. Can be set as a hotkey for easy access.
+### Linux Dependencies:
+- fzf
+- xclip
 
-Linux Dependencies:
-rofi
-xclip
-
-OS X Dependencies:
-choose https://github.com/sdegutis/choose
+### OS X Dependencies:
+- fzf
 
 Compatible only with vcard .vcf files. 
 
+## Usage:
 
-To get a .vcf file from Google Contacts:
-Go to https://www.google.com/contacts/ and export desired contacts in a vcard format (for importing into Apple Address Book or another application).
-
-To use contact-prompt:
-1. Move .vcf file to ~/.contacts.vcf
-2. Execute contact-prompt
-
-Optional: 
-Place contact-prompt in $PATH to make it a command
+```bash
+❯ contact-prompt --help
+usage: ./contact-prompt --vcf [PATH]
+```

@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+usage="usage: $0 --vcf [PATH]"
+
+for arg in "$@"
+do
+	case "${arg}" in
+		--vcf)
+			export contactMissing="false"
+			;;
+		-h|--help)
+			echo ${usage}
+			exit 0
+			;;	
+	esac
+done
+
+args="$@"
+
+if [[ ${contactMissing} == "false" ]]
+then
+	vcf="$(echo ${args} | awk -F'--vcf ' '{print $2}' | cut -d ' ' -f1)"
+else
+	vcf="$HOME/.contacts.vcf"
+fi
+
+checkVcf () {
+	vcf="$1"
+	if [[ -z "${vcf}" ]]
+	then
+		echo ${usage}
+		exit 1
+	fi
+	if [[ ! -e "${vcf}" ]]
+	then
+		echo "${vcf} doesn't exist. Exiting."
+		exit 1
+	fi
+}
+
+checkVcf "${vcf}"
+
+## Dependency check
+if uname -a | grep -iq linux
+then 
+	deps="fzf xclip"
+	copyCommand="xclip"
+elif uname -a | grep -iq darwin
+then
+	deps="fzf"
+	copyCommand="pbcopy"
+fi
+
+missingDeps=()
+error="false"
+for dep in "${deps}"
+do
+	if ! which ${dep} >> /dev/null
+	then 
+		export error="true" 
+		missingDeps+="${dep}"
+	fi
+done
+
+if [[ ${error} != "false" ]]
+then
+	echo "Missing dependencies: ${missingDeps}"
+	exit 1
+fi
+
+fullName=$(grep 'FN' ${vcf} | cut -d":" -f2- | sed '/^\s*$/d' | sort -u | fzf)
+
+selection=$(awk '/FN:'"${fullName}"'/,/END:VCARD/' ~/.contacts.vcf | grep -v "END:VCARD" | cut -d':' -f2 | grep -v "${fullName}" | sort -u | fzf | tr -d '\r\n')
+
+echo "${selection}" | $copyCommand
